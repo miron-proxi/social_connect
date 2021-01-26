@@ -19,7 +19,7 @@ class RegisterController extends AbstractController
         $this->entityManager = $entityManager;
     }
     /**
-     * @Route("/inscription", name="register")
+     * @Route("/register", name="register")
      */
     public function index(Request $request, UserPasswordEncoderInterface $encoder): Response
     {
@@ -30,10 +30,8 @@ class RegisterController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()){
             $user = $form->getData(); // tu injectes toute les données reçu dans le formulaire
-
-            $password = $encoder->encodePassword($user, $user->getpassword());
+            $password = $encoder->encodePassword($user, $user->getPassword());
             $user->setPassword($password);
-            // dd($password);
 
             $this->entityManager->persist($user); // fige les data pour pouvoir les enregistrer plus tard
             $this->entityManager->flush(); // enregistre les data dans la db
