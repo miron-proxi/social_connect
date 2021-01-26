@@ -4,10 +4,12 @@
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
-
-        {% block javascripts %}{% endblock %}
+        <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
     </head>
     <body>
-        {% block body %}{% endblock %}
+        {% block content %}{% endblock %}
+        {% block javascripts %}
+        <script src="{{ asset('assets/js/bootstrap.bundle.js') }}"></script>
+        {% endblock %}
     </body>
 </html>
