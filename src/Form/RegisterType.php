@@ -63,12 +63,13 @@ class RegisterType extends AbstractType
                 'second_options' => [
                     'label' => 'Confirmez votre mot de passe',
                     'attr' => [
-                        'placeholder' => 'confirmer votre mot de passe ici'
+                        'placeholder' => 'confirmer votre mot de passe ici',
+                        'class' => 'mb-4'
                     ]
                 ]
             ]) // ajoute un input password
             ->add('submit', SubmitType::class, [
-                'label' => 'S\'inscrire'
+                'label' => 'Register'
             ])
         ;
     }

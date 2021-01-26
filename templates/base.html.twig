@@ -7,6 +7,19 @@
         <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
     </head>
     <body>
+        <header>
+            <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-item-custom">
+                        {% if app.user %}
+                        <a href="{{ path('account') }}">Mon compte <small>{{ app.user.firstname }}</small></a> | <a href="{{ path('app_logout') }}">logout</a>
+                        {% else %}
+                        <a href="{{ path('app_login') }}">sign in</a> | <a href="{{ path('register') }}">sign up</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </nav>
+        </header>
         {% block content %}{% endblock %}
         {% block javascripts %}
         <script src="{{ asset('assets/js/bootstrap.bundle.js') }}"></script>
