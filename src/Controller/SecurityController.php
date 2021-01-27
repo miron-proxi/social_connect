@@ -2,9 +2,10 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Facebook\Facebook;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
@@ -23,7 +24,19 @@ class SecurityController extends AbstractController
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+        // Facebook
+        $fb = new Facebook([
+            'app_id' => '316673569784985',
+            'app_secret' => '83d47b9812e5b31e900c0667693bd177',
+            'default_graph_version' => 'v2.10',
+            ]);
+          $helper = $fb->getRedirectLoginHelper();
+          
+          $permissions = ['email']; // Optional permissions
+          $loginUrl = $helper->getLoginUrl('https://127.0.0.1:8000/login', $permissions);
+          
+
+        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error, 'loginUrl' => $loginUrl]);
     }
 
     /**
